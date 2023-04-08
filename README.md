@@ -1,9 +1,11 @@
 
 # pypersonality
 
-Written in python , Module to identify the personality type from a text given using (MBTI) Myers-Briggs Personality Type Dataset
+Written in python , Module to identify the personality type from a text given using (MBTI) Myers-Briggs Personality Type Dataset.
 
-### How to use it
+![](https://github.com/karthagokul/pypersonality/blob/main/personality_types.jpg?raw=true)
+
+### How to use it?
 Install the module from pypi https://pypi.org/project/pypersonality/
 
     pip install pypersonality
