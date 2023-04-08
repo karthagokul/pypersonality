@@ -1,0 +1,3 @@
+Upload
+pip install -e .
+twine upload -r pypersonality  dist\* --config-file "C:\Users\Gokul Kartha\.pypirc" --repository pypi
