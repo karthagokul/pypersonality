@@ -1,9 +1,35 @@
 from pypersonality.personality import PyPersonality
+from functools import reduce
+
+
+def read_file_as_list(filename):
+    list = []
+    with open(filename, "r", encoding="utf8") as file:
+        for line in file:
+            if not line.isspace():
+                list.append(line)
+    return list
 
 
 p = PyPersonality()
-results = p.get_personality(
-    "Oh, thanks for inviting me. I appreciate it. I'm not sure if I'll be able to make it, though. I have some other things I need to take care of this weekend . I'm sure it will be a great time, but I'm just not feeling up for a big social gathering right now. Maybe we can plan something else another time?"
-)
+dictlist = [{}]
 
-print(results)
+data = read_file_as_list("demo_text/modi.txt")
+for line in data:
+    dictlist.append(p.get_personality(line))
+
+new_dictionary = {}
+for dictionary in dictlist:
+    for key, value in dictionary.items():
+        if key in new_dictionary:
+            new_dictionary[key] = value + new_dictionary[key]
+        else:
+            new_dictionary[key] = value
+
+total = sum(new_dictionary.values())
+print("Personlity Profile from text")
+for key, value in new_dictionary.items():
+    if value != 0:
+        properties = p.describe_type(key)
+        percentage = (value / total) * 100
+        print("Type : %s , Percentage : %d , Characteristics : %s" % (key, percentage, properties))
