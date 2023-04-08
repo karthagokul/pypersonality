@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import nltk
 import string
 from nltk.classify import NaiveBayesClassifier
@@ -12,22 +11,12 @@ class PyPersonalityTrainer:
         pass
 
     def train(self, model_folder):
-        # ### Importing the dataset
         data_set = pd.read_csv("input/mbti_personality_input.csv")
         data_set.tail()
-        # ### Checking the dataset for missing values
         data_set.isnull().any()
         data_set.iloc[0, 1].split("|||")
         types = np.unique(np.array(data_set["type"]))
         total = data_set.groupby(["type"]).count() * 50
-        plt.figure(figsize=(12, 6))
-        plt.bar(
-            np.array(total.index),
-            height=total["posts"],
-        )
-        plt.xlabel("Personality types", size=14)
-        plt.ylabel("Number of posts available", size=14)
-        plt.title("Total posts for each personality type")
         all_posts = pd.DataFrame()
         for j in types:
             temp1 = data_set[data_set["type"] == j]["posts"]
